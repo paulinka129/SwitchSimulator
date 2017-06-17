@@ -1,0 +1,11 @@
+﻿<StackPanel x:Class="SwitchSimulator.Controls.DeviceControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SwitchSimulator.Controls"
+             mc:Ignorable="d" Width="150" Height="100"
+            Name="DeviceControlPanel">
+    <local:DragDropControl x:Name="DragDropControlImage" Width="150" Height="100"></local:DragDropControl>
+    <!--<Label Background="White" Content="{Binding Path=Device.Name, ElementName=DeviceControlPanel}" Height="20" Foreground="DarkBlue" FontWeight="Bold"></Label>-->
+</StackPanel>

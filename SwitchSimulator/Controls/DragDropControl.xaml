@@ -1,0 +1,81 @@
+﻿<StackPanel x:Class="SwitchSimulator.Controls.DragDropControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SwitchSimulator.Controls"
+             mc:Ignorable="d" 
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:switchSimulatorCore="clr-namespace:SwitchSimulatorCore;assembly=SwitchSimulatorCore"
+             dxb:BarNameScope.IsScopeOwner="True"
+             Width="150" Height="100">
+    <dxb:BarManager.DXContextMenu>
+        <dxb:PopupMenu Name="ContextMenu">
+            <dxb:PopupMenu.Items>
+                <dxb:BarButtonItem Name="PlugInButton"
+                                Content="Podłącz"
+                                Glyph="pack://application:,,,/Resources/plug.png"
+                                ItemClick="PlugInButton_OnItemClick">
+                    <dxb:BarButtonItem.Style>
+                        <Style TargetType="dxb:BarButtonItem">
+                            <Style.Triggers>
+                                <!--<DataTrigger Binding="{Binding Path=Device.Connected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl} }" Value="True">
+                                    <Setter Property="IsVisible" Value="False"></Setter>
+                                </DataTrigger>-->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=Device.Connected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl}, Mode=TwoWay}" Value="True"/>
+                                        <!--<Condition Binding="{Binding Path=Device, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl}}" Value="{x:Type switchSimulatorCore:Switch}"></Condition>-->
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsVisible" Value="False"></Setter>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </dxb:BarButtonItem.Style>
+                </dxb:BarButtonItem>
+                <dxb:BarButtonItem Name="UnplugButton"
+                                Content="Odłącz"
+                                Glyph="pack://application:,,,/Resources/plug.png"
+                                ItemClick="UnplugButton_OnItemClick">
+                    <dxb:BarButtonItem.Style>
+                        <Style TargetType="dxb:BarButtonItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Device.Connected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl}, Mode=TwoWay }" Value="False">
+                                    <Setter Property="IsVisible" Value="False"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </dxb:BarButtonItem.Style>
+                </dxb:BarButtonItem>
+                <dxb:BarButtonItem Name="DeleteDeviceButton"
+                                Content="Usuń urządzenie"
+                                Glyph="pack://application:,,,/Resources/delete.png"
+                                ItemClick="DeleteDeviceButton_OnItemClick"/>
+            </dxb:PopupMenu.Items>
+        </dxb:PopupMenu>
+    </dxb:BarManager.DXContextMenu>
+    <Image Name="ControlImage" Width="150" Height="80"/>
+    <Label Content="{Binding Path=Device.Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl} }" Background="Transparent" Width="150" Height="20" Foreground="Black" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalContentAlignment="Center">
+        <Label.Style>
+            <Style TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=Device.Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DeviceControl} }" Value="{x:Null}">
+                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Label.Style>
+    </Label>
+    <Label Content="{Binding Path=SwitchDevice.Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SwitchControl}}" Background="Transparent" Width="150" Height="20" Foreground="Black" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalContentAlignment="Center">
+        <Label.Style>
+            <Style TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=SwitchDevice.Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SwitchControl}}" Value="{x:Null}">
+                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Label.Style>
+    </Label>
+        <!--<Label Name="ControlLabel" Background="Transparent" Width="150" Height="20" Foreground="DarkBlue" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalContentAlignment="Center"/>-->
+</StackPanel>
