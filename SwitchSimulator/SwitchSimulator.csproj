@@ -127,12 +127,14 @@
       <DependentUpon>SwitchControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventArg\MovedEventArgs.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="ObservableDictionary.cs" />
     <Compile Include="RandomHelper.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="SelectSwitchView.xaml.cs">
       <DependentUpon>SelectSwitchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\DeviceControl.xaml">

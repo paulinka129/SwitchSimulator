@@ -24,8 +24,6 @@ namespace SwitchSimulator.Controls
     /// </summary>
     public partial class NetworkControl : Canvas
     {
-       
-
         public List<SwitchControl> SwitchControls { get; set; }
         public List<DeviceControl> DeviceControls { get; set; }
         public NetworkControl()
@@ -54,6 +52,21 @@ namespace SwitchSimulator.Controls
             Children.Add(devicePanel);
         }
 
+        public void AddSwitchControl(Switch switchDevice)
+        {
+            var switchPanel = new SwitchControl(switchDevice);
+            switchPanel.Name = $"SwitchPanel{switchDevice.Name}";
+            switchPanel.DragDropControlImage.ControlImage.Source = new BitmapImage(new Uri(
+             "pack://application:,,,/SwitchSimulator;component/Resources/switch.png"));
+
+            HideContextMenu(switchPanel);
+            switchPanel.OnDelete += DeleteDevice;
+            switchPanel.SetLeft(10);
+            switchPanel.SetTop(10);
+            SwitchControls.Add(switchPanel);
+            Children.Add(switchPanel);
+        }
+
         private void DisconnetFromSwitch(object sender, EventArgs args)
         {
             var computerControl = (sender as DragDropControl).Parent as DeviceControl;
@@ -71,7 +84,7 @@ namespace SwitchSimulator.Controls
             computerControl.Connector = null;
             computerControl.SwitchControl = null;
 
-            switchDevice.RemoveDevice(computer.Port.Number);
+            switchDevice.RemoveDevice(computer);
 
 
         }
@@ -91,7 +104,7 @@ namespace SwitchSimulator.Controls
             computerControl.Connector = null;
             computerControl.SwitchControl = null;
 
-            switchDevice.RemoveDevice(computer.Port.Number);
+            switchDevice.RemoveDevice(computer);
         }
 
         private void DeleteDevice(object sender, EventArgs args)
@@ -136,23 +149,7 @@ namespace SwitchSimulator.Controls
                 Children.Remove(switchControl);
             }
         }
-
-        public void AddSwitchControl(Switch switchDevice)
-        {
-            var switchPanel = new SwitchControl(switchDevice);
-            switchPanel.Name = $"SwitchPanel{switchDevice.Name}";
-            switchPanel.DragDropControlImage.ControlImage.Source = new BitmapImage(new Uri(
-             "pack://application:,,,/SwitchSimulator;component/Resources/switch.png"));
-
-            HideContextMenu(switchPanel);
-
-            switchPanel.OnDelete += DeleteDevice;
-            switchPanel.SetLeft(10);
-            switchPanel.SetTop(10);
-            SwitchControls.Add(switchPanel);
-            Children.Add(switchPanel);
-        }
-
+        
         private void HideContextMenu(SwitchControl switchPanel)
         {
             var barItem1 = switchPanel.DragDropControlImage.ContextMenu.Items.FirstOrDefault(x => ((BarItem)x).Name == "PlugInButton") as BarItem;

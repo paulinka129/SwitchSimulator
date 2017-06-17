@@ -65,9 +65,10 @@ namespace SwitchSimulatorCore
             return false;
         }
 
-        public void RemoveDevice(int portNumber)
+        public void RemoveDevice(IDevice device)
         {
-            Ports[portNumber].Unplug();
+            RemoveFromSwitchTable(device);
+            Ports[device.Port.Number].Unplug();
         }
 
         public void RemoveAllDevices()

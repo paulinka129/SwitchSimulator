@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using SwitchSimulator.Controls;
 
 namespace SwitchSimulator.ViewModel
 {
@@ -41,7 +42,7 @@ namespace SwitchSimulator.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
+            SimpleIoc.Default.Register<NetworkControl>();
             SimpleIoc.Default.Register<MainViewModel>();
         }
 

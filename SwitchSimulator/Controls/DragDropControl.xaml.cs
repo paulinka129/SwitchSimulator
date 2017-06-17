@@ -33,6 +33,7 @@ namespace SwitchSimulator.Controls
         public event OnDelete OnDelete;
         public event OnDisconnect OnDisconnect;
         public event OnMoved OnMoved;
+        public Canvas ParentCanvas { get; set; }
 
         public DragDropControl()
         {
@@ -61,6 +62,7 @@ namespace SwitchSimulator.Controls
         {
             var parent = this.Parent as Panel;
             return parent.Parent as Canvas;
+            //return ParentCanvas;
         }
 
         private void Control_MouseMove(object sender, MouseEventArgs e)
